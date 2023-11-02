@@ -9,7 +9,10 @@ export default function Home() {
     <main className="w-screen border flex items-center justify-center">
       <section className="space-y-3 w-full ">
         {userData?.data.map((user) => (
-          <article className="py-4 bg-slate-800 text-gray-400 rounded-md px-4 shadow-lg flex items-center space-x-4">
+          <article
+            className="py-4 bg-slate-800 text-gray-400 rounded-md px-4 shadow-lg flex items-center space-x-4"
+            key={user.id}
+          >
             <p className="font-extrabold">{user.id}</p>
             <Image
               src={user.avatar}
@@ -19,7 +22,7 @@ export default function Home() {
               alt="user-profile"
             />
 
-            <div key={user.id}>
+            <div>
               {user.first_name} {user.last_name}
             </div>
           </article>
