@@ -43,10 +43,15 @@ jobs:
       # - name: Push docker image
       #   run: docker push ruhulinfo/myapp:${{ github.sha }}
 
-      # - name: Build and push Docker image
-      #   uses:
-      #   with:
-      #     context: .
-      #     push: true
-      #     tags:
-      #     labels:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build and push Docker image
+        with:
+          context: .
+          push: true
+          tags: ${{ github.repository }}/dashboard:${{ steps.get-version.outputs.version }}
+        env:
+          DOCKER_BUILDKIT: 1
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
